@@ -33,7 +33,7 @@ extension PhotoAPI: TargetType {
     }
 
     var task: Task {
-        return .requestPlain
+        return .requestParameters(parameters: ["format": "json", "tags": "dog", "nojsoncallback": 1], encoding: URLEncoding.default)
     }
 
     var headers: [String : String]? {

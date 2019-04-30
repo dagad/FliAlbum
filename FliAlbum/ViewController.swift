@@ -13,6 +13,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        PhotoService.shared.getPhotos(success: { photos in
+            print(photos)
+        }) { error in
+            print(error)
+        }
+
     }
 
 

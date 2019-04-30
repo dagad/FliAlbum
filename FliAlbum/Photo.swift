@@ -9,7 +9,25 @@
 import Mapper
 
 class Photo: Mappable {
-    required init(map: Mapper) throws {
+    let title: String
+    let link: String
+    let media: String
+    let dateTaken: String
+    let description: String
+    let published: String
+    let author: String
+    let id: String
+    let tags: String
 
+    required init(map: Mapper) throws {
+        title = map.optionalFrom("title") ?? ""
+        link = map.optionalFrom("link") ?? ""
+        media = map.optionalFrom("media") ?? ""
+        dateTaken = map.optionalFrom("date_taken") ?? ""
+        description = map.optionalFrom("description") ?? ""
+        published = map.optionalFrom("publised") ?? ""
+        author = map.optionalFrom("author") ?? ""
+        id = map.optionalFrom("id") ?? ""
+        tags = map.optionalFrom("tags") ?? ""
     }
 }

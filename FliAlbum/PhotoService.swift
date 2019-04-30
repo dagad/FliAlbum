@@ -10,13 +10,13 @@ import Moya
 import Moya_ModelMapper
 
 class PhotoService {
-    private static let shared = PhotoService()
+    static let shared = PhotoService()
     private let provider = MoyaProvider<PhotoAPI>()
 
     private init() {}
 
-    static func getPhotos(success: @escaping ([Photo]?) -> Void, failure: @escaping (Error) -> Void) {
-        PhotoService.shared.provider.request(.feedList) { result in
+    func getPhotos(success: @escaping ([Photo]?) -> Void, failure: @escaping (Error) -> Void) {
+        provider.request(.feedList) { result in
             switch result {
             case let .success(response):
                 if let photos = try? response.map(to: [Photo].self, keyPath: "items") {
