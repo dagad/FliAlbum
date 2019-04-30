@@ -14,13 +14,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         PhotoService.shared.getPhotos(success: { photos in
-            print(photos)
+            
         }) { error in
             print(error)
         }
 
     }
-
-
 }
 

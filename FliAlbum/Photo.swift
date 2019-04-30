@@ -16,7 +16,7 @@ class Photo: Mappable {
     let description: String
     let published: String
     let author: String
-    let id: String
+    let authorId: String
     let tags: String
 
     required init(map: Mapper) throws {
@@ -27,7 +27,7 @@ class Photo: Mappable {
         description = map.optionalFrom("description") ?? ""
         published = map.optionalFrom("publised") ?? ""
         author = map.optionalFrom("author") ?? ""
-        id = map.optionalFrom("id") ?? ""
+        authorId = map.optionalFrom("id") ?? ""
         tags = map.optionalFrom("tags") ?? ""
     }
 }
