@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BD2CB812278041D00255CDB /* PhotoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD2CB802278041D00255CDB /* PhotoAPI.swift */; };
+		2BD2CB832278042900255CDB /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD2CB822278042900255CDB /* PhotoService.swift */; };
+		2BD2CB852278082400255CDB /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD2CB842278082400255CDB /* Photo.swift */; };
 		3ECD50CD6E673CF15388B6ED /* Pods_FliAlbum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A5401708F0999CDF1F92A6 /* Pods_FliAlbum.framework */; };
 		42013C7D2277BB7800FC0E5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42013C7C2277BB7800FC0E5E /* AppDelegate.swift */; };
 		42013C7F2277BB7800FC0E5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42013C7E2277BB7800FC0E5E /* ViewController.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2BD2CB802278041D00255CDB /* PhotoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAPI.swift; sourceTree = "<group>"; };
+		2BD2CB822278042900255CDB /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		2BD2CB842278082400255CDB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		42013C792277BB7800FC0E5E /* FliAlbum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FliAlbum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42013C7C2277BB7800FC0E5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42013C7E2277BB7800FC0E5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +110,9 @@
 				42013C832277BB7900FC0E5E /* Assets.xcassets */,
 				42013C852277BB7900FC0E5E /* LaunchScreen.storyboard */,
 				42013C882277BB7900FC0E5E /* Info.plist */,
+				2BD2CB802278041D00255CDB /* PhotoAPI.swift */,
+				2BD2CB822278042900255CDB /* PhotoService.swift */,
+				2BD2CB842278082400255CDB /* Photo.swift */,
 			);
 			path = FliAlbum;
 			sourceTree = "<group>";
@@ -327,8 +336,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BD2CB832278042900255CDB /* PhotoService.swift in Sources */,
 				42013C7F2277BB7800FC0E5E /* ViewController.swift in Sources */,
 				42013C7D2277BB7800FC0E5E /* AppDelegate.swift in Sources */,
+				2BD2CB812278041D00255CDB /* PhotoAPI.swift in Sources */,
+				2BD2CB852278082400255CDB /* Photo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,7 +510,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dagad.FliAlbum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dagad.FliAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -517,7 +529,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dagad.FliAlbum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dagad.FliAlbum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
