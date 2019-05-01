@@ -29,6 +29,5 @@ class PhotoService {
                 failure(error)
             }
         }
-
     }
 }
