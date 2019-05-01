@@ -19,13 +19,6 @@ class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        PhotoService.shared.getPhotos(success: { photos in
-            
-        }) { error in
-            print(error)
-        }
-
     }
     
     @IBAction func increseTime(_ sender: UIButton) {
@@ -45,7 +38,8 @@ class StartViewController: UIViewController {
     }
     
     @IBAction func startSlideShow(_ sender: Any) {
-        
+        let slideVC = SlideShowViewController(with: TimeInterval(time))
+        navigationController?.pushViewController(slideVC, animated: true)
     }
 }
 
