@@ -13,6 +13,7 @@ class SlideShowViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     private var interval: TimeInterval
     private weak var myTimer: Timer?
+    private var fetcher = PhotoFetcher()
     
     init(with interval: TimeInterval) {
         self.interval = interval
@@ -29,11 +30,17 @@ class SlideShowViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let timer = Timer(timeInterval: interval, repeats: true) { [weak self] _ in
-            self?.changePhoto()
+        self.fetcher.delegate = self
+        let timer = Timer(timeInterval: interval, repeats: true) { [weak self] timer in
+            guard let currentInterval = self?.interval else { return }
+            self?.changePhoto(at: Int(timer.timeInterval / currentInterval))
         }
         myTimer = timer
-        RunLoop.current.add(timer, forMode: .default)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startSlideShow()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -41,7 +48,24 @@ class SlideShowViewController: UIViewController {
         myTimer?.invalidate()
     }
     
-    private func changePhoto() {
+    private func changePhoto(at index: Index) {
+        guard let photo = fetcher.photoAtIndexPath(index) else { return }
+        // use photo to display
+        print("\(index)")
+    }
+    
+    private func startSlideShow() {
+        fetcher.startFetch()
+    }
+}
 
+extension SlideShowViewController: PhotoFetcherDelegate {
+    func fetcher(_ fetcher: PhotoFetcher, didFetchItemList: [Photo]) {
+        guard let timer = myTimer else { return }
+        RunLoop.current.add(timer, forMode: .default)
+    }
+    
+    func fetcher(_ fetcher: PhotoFetcher, didOccur error: Error) {
+        
     }
 }
