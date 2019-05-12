@@ -55,6 +55,7 @@ class PhotoFetcher: NSObject {
 // MARK: - Server API
 extension PhotoFetcher {
     private func requestPhotos() {
+        
         PhotoService.shared.getPhotos(success: { [weak self] photos in
             guard let photos = photos else { return }
             self?.downloadImages(from: photos)
