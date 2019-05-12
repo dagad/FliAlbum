@@ -7,6 +7,7 @@ target 'FliAlbum' do
 
   pod 'Moya'
   pod 'Moya-ModelMapper'
+  pod 'Kingfisher', '~> 5.0'
 
   target 'FliAlbumTests' do
     inherit! :search_paths
