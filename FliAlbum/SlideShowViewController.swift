@@ -52,7 +52,7 @@ class SlideShowViewController: UIViewController {
     private func changePhoto() {
         guard let photo = fetcher.photoAtIndexPath(photoIndex) else { return }
         print(photoIndex)
-        
+        imageView.image = photo.imageView.image
         photoIndex += 1
     }
     

@@ -58,6 +58,7 @@ extension PhotoFetcher {
             guard let photos = photos else { return }
             guard let strongSelf = self else { return }
             for (index, photo) in photos.enumerated() {
+                photo.downloadImage()
                 self?.states[index] = .fetched(photo: photo)
             }
             self?.delegate?.fetcher(strongSelf, didFetchItemList: photos)
