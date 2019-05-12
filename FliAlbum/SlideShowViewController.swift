@@ -41,6 +41,14 @@ class SlideShowViewController: UIViewController {
                                                selector: #selector(appMovedToForeGround),
                                                name: UIApplication.didBecomeActiveNotification,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(stopSlideShow),
+                                               name: .networkDisconnected,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reStartSlideShow),
+                                               name: .networkConnected,
+                                               object: nil)
     }
     
     @objc func appMovedToForeGround() {
@@ -58,6 +66,17 @@ class SlideShowViewController: UIViewController {
     
     private func startSlideShow() {
         fetcher.startFetch()
+    }
+    
+    @objc private func reStartSlideShow() {
+        print("reStartSlideShow")
+        waitQueue.resume()
+    }
+    
+    @objc private func stopSlideShow() {
+        print("stopSlideShow")
+        waitQueue.suspend()
+        UIAlertController.showNetworkAlert(.notReachable)
     }
     
     private func changePhoto() {

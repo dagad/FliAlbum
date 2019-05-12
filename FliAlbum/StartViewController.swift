@@ -38,6 +38,10 @@ class StartViewController: UIViewController {
     }
     
     @IBAction func startSlideShow(_ sender: Any) {
+        guard NetworkObserver.shared.isReachable else {
+            UIAlertController.showNetworkAlert(.notReachable)
+            return
+        }
         let slideVC = SlideShowViewController(with: TimeInterval(time))
         navigationController?.pushViewController(slideVC, animated: true)
     }

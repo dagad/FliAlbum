@@ -19,15 +19,22 @@ class NetworkObserver {
     
     let reachabilityManager = NetworkReachabilityManager()
     
+    var isReachable: Bool {
+        return reachabilityManager?.isReachable ?? false
+    }
+    
     func startListening() {
         reachabilityManager?.listener = { status in
             switch status {
             case .notReachable:
                 UIAlertController.showNetworkAlert(.notReachable)
+                NotificationCenter.default.post(name: .networkDisconnected, object: nil)
             case .reachable(.ethernetOrWiFi):
                 UIAlertController.showNetworkAlert(.reachable)
+                NotificationCenter.default.post(name: .networkConnected, object: nil)
             case .reachable(.wwan):
                 UIAlertController.showNetworkAlert(.reachable)
+                NotificationCenter.default.post(name: .networkConnected, object: nil)
             default:
                 return
             }
