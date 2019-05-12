@@ -13,6 +13,7 @@ class SlideShowViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     private var interval: TimeInterval
     private var fetcher = PhotoFetcher()
+    private let waitQueue = DispatchQueue(label: "wait")
     
     private var photoIndex: Index = 0
     
@@ -32,6 +33,22 @@ class SlideShowViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetcher.delegate = self
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appMovedToBackground),
+                                               name: UIApplication.willResignActiveNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appMovedToForeGround),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
+    }
+    
+    @objc func appMovedToForeGround() {
+        waitQueue.resume()
+    }
+    
+    @objc func appMovedToBackground() {
+        waitQueue.suspend()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,14 +76,16 @@ class SlideShowViewController: UIViewController {
     }
     
     private func wait() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + self.interval) { [weak self] in
+        waitQueue.asyncAfter(deadline: .now() + self.interval) { [weak self] in
             self?.fadeOut()
         }
     }
     
     private func fadeOut() {
-        imageView.animate([.fadeOut(duration: 0.5)]) { [weak self] in
-            self?.changePhoto()
+        DispatchQueue.main.async { [weak self] in
+            self?.imageView.animate([.fadeOut(duration: 0.5)]) {
+                self?.changePhoto()
+            }
         }
     }
 }
