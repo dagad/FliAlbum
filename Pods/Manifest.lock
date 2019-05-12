@@ -1,0 +1,43 @@
+PODS:
+  - Alamofire (4.8.2)
+  - Kingfisher (5.3.1)
+  - ModelMapper (10.0.0):
+    - ModelMapper/Core (= 10.0.0)
+  - ModelMapper/Core (10.0.0)
+  - Moya (12.0.1):
+    - Moya/Core (= 12.0.1)
+  - Moya-ModelMapper (8.0.0):
+    - Moya-ModelMapper/Core (= 8.0.0)
+  - Moya-ModelMapper/Core (8.0.0):
+    - ModelMapper
+    - Moya (~> 12.0)
+  - Moya/Core (12.0.1):
+    - Alamofire (~> 4.1)
+    - Result (~> 4.0)
+  - Result (4.1.0)
+
+DEPENDENCIES:
+  - Kingfisher (~> 5.0)
+  - Moya
+  - Moya-ModelMapper
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Kingfisher
+    - ModelMapper
+    - Moya
+    - Moya-ModelMapper
+    - Result
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Kingfisher: d9e7e0b209b59b8f9873aa2f37654e81a7beea51
+  ModelMapper: a8dbf2a2003bf626627b9fe7c9a22b3405a30404
+  Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
+  Moya-ModelMapper: 9032a62301f6489405d56b7bb4e1f54944638fe3
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
+
+PODFILE CHECKSUM: c778e7903551ef289c0945d922c21e1257089821
+
+COCOAPODS: 1.6.1
