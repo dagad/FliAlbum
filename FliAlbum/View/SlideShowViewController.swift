@@ -12,7 +12,11 @@ import Kingfisher
 class SlideShowViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
-    private var interval: TimeInterval
+    private var interval: TimeInterval {
+        didSet {
+            reloadTitle()
+        }
+    }
     private var fetcher = PhotoFetcher()
     private let waitQueue = DispatchQueue(label: "wait")
     private let maxPhotoCount = 20
@@ -41,6 +45,7 @@ class SlideShowViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetcher.delegate = self
+        reloadTitle()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(appMovedToBackground),
                                                name: UIApplication.willResignActiveNotification,
@@ -57,11 +62,25 @@ class SlideShowViewController: UIViewController {
                                                selector: #selector(reStartSlideShow),
                                                name: .networkConnected,
                                                object: nil)
+        
+        let increaseTimeButton = UIBarButtonItem(title: "plus",
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(increaseTimeInterval))
+        let decreaseTimeButton = UIBarButtonItem(title: "minus",
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(decreaseTimeInterval))
+        self.navigationItem.setRightBarButtonItems([decreaseTimeButton, increaseTimeButton], animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startSlideShow()
+    }
+    
+    private func reloadTitle() {
+        self.title = "Interval is \(Int(interval))"
     }
     
     private func startSlideShow() {
@@ -85,6 +104,16 @@ class SlideShowViewController: UIViewController {
     
     @objc private func appMovedToBackground() {
         waitQueue.suspend()
+    }
+    
+    @objc private func increaseTimeInterval() {
+        guard interval < 10 else { return }
+        interval += 1
+    }
+    
+    @objc private func decreaseTimeInterval() {
+        guard interval > 1 else { return }
+        interval -= 1
     }
     
     private func changePhoto() {

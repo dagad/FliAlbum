@@ -28,7 +28,7 @@ class StartViewController: UIViewController {
     }
     
     @IBAction func decreaseTime(_ sender: UIButton) {
-        guard time > 0 else { return }
+        guard time > 1 else { return }
         time -= 1
         setTime(time)
     }
