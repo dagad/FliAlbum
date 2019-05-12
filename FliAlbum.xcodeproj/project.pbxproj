@@ -118,22 +118,15 @@
 		42013C7B2277BB7800FC0E5E /* FliAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				4A1814EE228872170071CD23 /* Extension */,
+				4A1814EC228871CF0071CD23 /* Network */,
+				4A1814EB228871C60071CD23 /* Fetcher */,
+				4A1814EA228871C00071CD23 /* Model */,
+				4A1814E9228871BC0071CD23 /* View */,
 				42013C7C2277BB7800FC0E5E /* AppDelegate.swift */,
-				42013C7E2277BB7800FC0E5E /* StartViewController.swift */,
-				42013C802277BB7800FC0E5E /* Main.storyboard */,
 				42013C832277BB7900FC0E5E /* Assets.xcassets */,
 				42013C852277BB7900FC0E5E /* LaunchScreen.storyboard */,
 				42013C882277BB7900FC0E5E /* Info.plist */,
-				2BD2CB802278041D00255CDB /* PhotoAPI.swift */,
-				2BD2CB822278042900255CDB /* PhotoService.swift */,
-				2BD2CB842278082400255CDB /* Photo.swift */,
-				420533BE227923FA004CD9BE /* SlideShowViewController.swift */,
-				420533BF227923FA004CD9BE /* SlideShowViewController.xib */,
-				420533C2227937BE004CD9BE /* PhotoFetcher.swift */,
-				4A1814DF228825EB0071CD23 /* Animation.swift */,
-				4A1814E122884EB20071CD23 /* NetworkObserver.swift */,
-				4A1814E3228852DD0071CD23 /* UIAlertController.swift */,
-				4A1814E522885A9F0071CD23 /* Notification.swift */,
 			);
 			path = FliAlbum;
 			sourceTree = "<group>";
@@ -145,6 +138,53 @@
 				42013C932277BB7900FC0E5E /* Info.plist */,
 			);
 			path = FliAlbumTests;
+			sourceTree = "<group>";
+		};
+		4A1814E9228871BC0071CD23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				42013C7E2277BB7800FC0E5E /* StartViewController.swift */,
+				42013C802277BB7800FC0E5E /* Main.storyboard */,
+				420533BE227923FA004CD9BE /* SlideShowViewController.swift */,
+				420533BF227923FA004CD9BE /* SlideShowViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A1814EA228871C00071CD23 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2BD2CB842278082400255CDB /* Photo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A1814EB228871C60071CD23 /* Fetcher */ = {
+			isa = PBXGroup;
+			children = (
+				420533C2227937BE004CD9BE /* PhotoFetcher.swift */,
+			);
+			path = Fetcher;
+			sourceTree = "<group>";
+		};
+		4A1814EC228871CF0071CD23 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4A1814E122884EB20071CD23 /* NetworkObserver.swift */,
+				2BD2CB802278041D00255CDB /* PhotoAPI.swift */,
+				2BD2CB822278042900255CDB /* PhotoService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		4A1814EE228872170071CD23 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4A1814DF228825EB0071CD23 /* Animation.swift */,
+				4A1814E3228852DD0071CD23 /* UIAlertController.swift */,
+				4A1814E522885A9F0071CD23 /* Notification.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		BCF8E9B6A4B265231055FAFA /* Pods */ = {
