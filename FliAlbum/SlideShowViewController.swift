@@ -12,8 +12,10 @@ class SlideShowViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     private var interval: TimeInterval
-    private weak var myTimer: Timer?
+    private var myTimer: Timer?
     private var fetcher = PhotoFetcher()
+    
+    private var photoIndex: Index = 0
     
     init(with interval: TimeInterval) {
         self.interval = interval
@@ -32,8 +34,7 @@ class SlideShowViewController: UIViewController {
         super.viewDidLoad()
         self.fetcher.delegate = self
         let timer = Timer(timeInterval: interval, repeats: true) { [weak self] timer in
-            guard let currentInterval = self?.interval else { return }
-            self?.changePhoto(at: Int(timer.timeInterval / currentInterval))
+            self?.changePhoto()
         }
         myTimer = timer
     }
@@ -48,10 +49,11 @@ class SlideShowViewController: UIViewController {
         myTimer?.invalidate()
     }
     
-    private func changePhoto(at index: Index) {
-        guard let photo = fetcher.photoAtIndexPath(index) else { return }
-        // use photo to display
-        print("\(index)")
+    private func changePhoto() {
+        guard let photo = fetcher.photoAtIndexPath(photoIndex) else { return }
+        print(photoIndex)
+        
+        photoIndex += 1
     }
     
     private func startSlideShow() {

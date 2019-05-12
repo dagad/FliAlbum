@@ -15,11 +15,13 @@ protocol PhotoFetcherDelegate: class {
     func fetcher(_ fetcher: PhotoFetcher, didOccur error: Error)
 }
 
+// swiftlint:disable identifier_name
 enum FetchState {
     case fetching
     case fetched(photo: Photo)
     case failed
 }
+// swiftlint:enable identifier_name
 
 class PhotoFetcher: NSObject {
     
