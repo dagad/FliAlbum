@@ -12,7 +12,6 @@ class SlideShowViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     private var interval: TimeInterval
-    private var myTimer: Timer?
     private var fetcher = PhotoFetcher()
     
     private var photoIndex: Index = 0
@@ -33,10 +32,6 @@ class SlideShowViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetcher.delegate = self
-        let timer = Timer(timeInterval: interval, repeats: true) { [weak self] timer in
-            self?.changePhoto()
-        }
-        myTimer = timer
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,27 +39,41 @@ class SlideShowViewController: UIViewController {
         startSlideShow()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        myTimer?.invalidate()
+    private func startSlideShow() {
+        fetcher.startFetch()
     }
     
     private func changePhoto() {
         guard let photo = fetcher.photoAtIndexPath(photoIndex) else { return }
-        print(photoIndex)
+        imageView.alpha = 0
         imageView.image = photo.imageView.image
+        photo.imageView.image = nil
+        fadeIn()
         photoIndex += 1
     }
     
-    private func startSlideShow() {
-        fetcher.startFetch()
+    private func fadeIn() {
+        imageView.animate([.fadeIn(duration: 0.5)]) { [weak self] in
+            self?.wait()
+        }
+    }
+    
+    private func wait() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + self.interval) { [weak self] in
+            self?.fadeOut()
+        }
+    }
+    
+    private func fadeOut() {
+        imageView.animate([.fadeOut(duration: 0.5)]) { [weak self] in
+            self?.changePhoto()
+        }
     }
 }
 
 extension SlideShowViewController: PhotoFetcherDelegate {
     func fetcher(_ fetcher: PhotoFetcher, didFetchItemList: [Photo]) {
-        guard let timer = myTimer else { return }
-        RunLoop.current.add(timer, forMode: .default)
+        changePhoto()
     }
     
     func fetcher(_ fetcher: PhotoFetcher, didOccur error: Error) {

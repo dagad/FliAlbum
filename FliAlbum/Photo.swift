@@ -33,9 +33,11 @@ class Photo: Mappable {
         tags = map.optionalFrom("tags") ?? ""
     }
     
-    func downloadImage() {
+    func downloadImage(execute completion: @escaping () -> Void) {
         guard let source = media["m"] else { return }
-        imageView.kf.setImage(with: URL(string: source))
-        print("downloaded Image")
+        imageView.kf.setImage(with: URL(string: source)) { result in
+            print("downloaded Image")
+            completion()
+        }
     }
 }

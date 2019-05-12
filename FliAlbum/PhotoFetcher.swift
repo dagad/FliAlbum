@@ -28,6 +28,7 @@ class PhotoFetcher: NSObject {
     weak var delegate: PhotoFetcherDelegate?
     
     private var states: [Index: FetchState] = [:]
+    private var buffer: [Index: FetchState] = [:]
     
     deinit {
         print("fetcher deinit")
@@ -56,14 +57,25 @@ extension PhotoFetcher {
     private func requestPhotos() {
         PhotoService.shared.getPhotos(success: { [weak self] photos in
             guard let photos = photos else { return }
-            guard let strongSelf = self else { return }
-            for (index, photo) in photos.enumerated() {
-                photo.downloadImage()
-                self?.states[index] = .fetched(photo: photo)
-            }
-            self?.delegate?.fetcher(strongSelf, didFetchItemList: photos)
+            self?.downloadImages(from: photos)
         }, failure: { error in
             
         })
+    }
+    
+    private func downloadImages(from photos: [Photo]) {
+        let group = DispatchGroup()
+        for (index, photo) in photos.enumerated() {
+            group.enter()
+            photo.downloadImage { [weak self] in
+                self?.states[index] = .fetched(photo: photo)
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.main) { [weak self] in
+            guard let strongSelf = self else { return }
+            self?.delegate?.fetcher(strongSelf, didFetchItemList: photos)
+        }
     }
 }
