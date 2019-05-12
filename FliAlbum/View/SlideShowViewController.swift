@@ -59,14 +59,6 @@ class SlideShowViewController: UIViewController {
                                                object: nil)
     }
     
-    @objc func appMovedToForeGround() {
-        waitQueue.resume()
-    }
-    
-    @objc func appMovedToBackground() {
-        waitQueue.suspend()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startSlideShow()
@@ -85,6 +77,14 @@ class SlideShowViewController: UIViewController {
         print("stopSlideShow")
         waitQueue.suspend()
         UIAlertController.showNetworkAlert(.notReachable)
+    }
+    
+    @objc private func appMovedToForeGround() {
+        waitQueue.resume()
+    }
+    
+    @objc private func appMovedToBackground() {
+        waitQueue.suspend()
     }
     
     private func changePhoto() {
@@ -123,9 +123,5 @@ class SlideShowViewController: UIViewController {
 extension SlideShowViewController: PhotoFetcherDelegate {
     func fetcher(_ fetcherReadyToShow: PhotoFetcher) {
         changePhoto()
-    }
-    
-    func fetcher(_ fetcher: PhotoFetcher, didOccur error: Error) {
-        
     }
 }

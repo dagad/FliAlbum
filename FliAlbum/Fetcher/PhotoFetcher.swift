@@ -12,7 +12,6 @@ typealias Index = Int
 
 protocol PhotoFetcherDelegate: class {
     func fetcher(_ fetcherReadyToShow: PhotoFetcher)
-    func fetcher(_ fetcher: PhotoFetcher, didOccur error: Error)
 }
 
 // swiftlint:disable identifier_name
@@ -37,14 +36,8 @@ class PhotoFetcher: NSObject {
     private var buffer: [Index: FetchState] = [:]
     private var preLoadedStates: [Index: FetchState] = [:]
     
-    private var isFirst = true
-    
     deinit {
         print("fetcher deinit")
-    }
-    
-    func clear() {
-        states.removeAll(keepingCapacity: true)
     }
     
     func startFetch() {
