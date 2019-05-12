@@ -13,7 +13,13 @@ enum NetworkStatus {
     case reachable
     
     var title: String {
-        return "ERROR"
+        switch self {
+        case .notReachable:
+            return "ERROR"
+        case .reachable:
+            return "Notification"
+        }
+        
     }
     
     var message: String {
