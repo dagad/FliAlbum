@@ -20,6 +20,10 @@ class Photo: Mappable {
     let authorId: String
     let tags: String
     var imageView = UIImageView()
+    
+    deinit {
+        print("deinit Photo")
+    }
 
     required init(map: Mapper) throws {
         title = map.optionalFrom("title") ?? ""
@@ -36,7 +40,6 @@ class Photo: Mappable {
     func downloadImage(execute completion: @escaping () -> Void) {
         guard let source = media["m"] else { return }
         imageView.kf.setImage(with: URL(string: source)) { result in
-            print("downloaded Image")
             completion()
         }
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SlideShowViewController: UIViewController {
     
@@ -14,7 +15,7 @@ class SlideShowViewController: UIViewController {
     private var interval: TimeInterval
     private var fetcher = PhotoFetcher()
     private let waitQueue = DispatchQueue(label: "wait")
-    
+    private let maxPhotoCount = 20
     private var photoIndex: Index = 0
     
     init(with interval: TimeInterval) {
@@ -28,6 +29,13 @@ class SlideShowViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        KingfisherManager.shared.cache.clearMemoryCache()
+        KingfisherManager.shared.cache.clearDiskCache()
+        KingfisherManager.shared.cache.cleanExpiredDiskCache()
     }
     
     override func viewDidLoad() {
@@ -86,6 +94,9 @@ class SlideShowViewController: UIViewController {
         photo.imageView.image = nil
         fadeIn()
         photoIndex += 1
+        if photoIndex == maxPhotoCount {
+            photoIndex = 0
+        }
     }
     
     private func fadeIn() {
@@ -110,7 +121,7 @@ class SlideShowViewController: UIViewController {
 }
 
 extension SlideShowViewController: PhotoFetcherDelegate {
-    func fetcher(_ fetcher: PhotoFetcher, didFetchItemList: [Photo]) {
+    func fetcher(_ fetcherReadyToShow: PhotoFetcher) {
         changePhoto()
     }
     
